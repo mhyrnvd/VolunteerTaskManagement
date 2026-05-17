@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="VolunteerTaskManagement.Api/VolunteerTaskManagement.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Common/">
+    <Project Path="Base/Base.Api/Base.Api.csproj" />
+    <Project Path="Base/Base.Application.Contracts/Base.Application.Contracts.csproj" />
+    <Project Path="Base/Base.Application/Base.Application.csproj" />
+    <Project Path="Base/Base.Domain/Base.Domain.csproj" />
+    <Project Path="Base/Base.Infrastructure/Base.Infrastructure.csproj" />
+  </Folder>
+</Solution>
