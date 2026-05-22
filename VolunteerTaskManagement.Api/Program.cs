@@ -1,4 +1,6 @@
+using Base.Api.Registration;
 using VolunteerTaskManagement.Gateway.Registration;
+using VolunteerTaskManagement.Infrastructure.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,15 +8,7 @@ builder.RegisterServices(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+VolunteerTaskManagementSeed.SeedDatabase(app);
+app.UseCustomMiddlewares(builder);
 
 app.Run();

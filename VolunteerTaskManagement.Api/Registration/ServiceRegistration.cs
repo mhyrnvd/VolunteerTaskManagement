@@ -1,4 +1,6 @@
 ﻿using Base.Api.Registration;
+using VolunteerTaskManagement.Application;
+using VolunteerTaskManagement.Infrastructure;
 
 namespace VolunteerTaskManagement.Gateway.Registration
 {
@@ -10,8 +12,8 @@ namespace VolunteerTaskManagement.Gateway.Registration
 
             builder.RegisterBaseApi(configuration);
 
-            //builder.RegisterEduGuideApplication(configuration);
-            //services.RegisterEduGuideInfra(configuration);
+            builder.RegisterVolunteerTaskManagementApplication(configuration);
+            services.RegisterVolunteerTaskManagementInfra(configuration);
         }
     }
 }

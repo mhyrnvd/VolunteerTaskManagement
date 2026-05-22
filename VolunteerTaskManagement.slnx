@@ -1,6 +1,9 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="VolunteerTaskManagement.Api/VolunteerTaskManagement.Api.csproj" />
+    <Project Path="VolunteerTaskManagement.Application/VolunteerTaskManagement.Application.csproj" />
+    <Project Path="VolunteerTaskManagement.Domain/VolunteerTaskManagement.Domain.csproj" />
+    <Project Path="VolunteerTaskManagement.Infrastructure/VolunteerTaskManagement.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Common/">
     <Project Path="Base/Base.Api/Base.Api.csproj" />
@@ -9,4 +12,7 @@
     <Project Path="Base/Base.Domain/Base.Domain.csproj" />
     <Project Path="Base/Base.Infrastructure/Base.Infrastructure.csproj" />
   </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>

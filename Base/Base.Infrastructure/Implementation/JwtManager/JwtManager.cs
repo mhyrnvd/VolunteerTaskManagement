@@ -30,13 +30,13 @@ namespace Base.Infrastructure.Implementation
             }
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration.GetValue<string>("Appsettings:Token")!));
+                Encoding.UTF8.GetBytes(configuration.GetValue<string>("JwtSettings:SecretKey")!));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
             var tokenDescriptor = new JwtSecurityToken(
-                issuer: configuration.GetValue<string>("Appsettings:Issuer"),
-                audience: configuration.GetValue<string>("Appsettings:Audience"),
+                issuer: configuration.GetValue<string>("JwtSettings:Issuer"),
+                audience: configuration.GetValue<string>("JwtSettings:Audience"),
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
