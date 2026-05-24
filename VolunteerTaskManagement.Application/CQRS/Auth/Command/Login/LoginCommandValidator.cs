@@ -8,11 +8,9 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
         {
             RuleLevelCascadeMode = CascadeMode.Stop;
 
-            RuleFor(x => x.Email)
+            RuleFor(x => x.UserName)
                 .NotEmpty()
-                .WithMessage("ایمیل اجباری است!")
-                .EmailAddress()
-                .WithMessage("فرمت ایمیل درست نیست!");
+                .WithMessage("نام کاربری اجباری است!");
 
             RuleFor(x => x.Password)
                 .NotEmpty()

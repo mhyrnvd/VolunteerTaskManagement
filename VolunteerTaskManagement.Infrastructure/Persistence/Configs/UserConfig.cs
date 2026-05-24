@@ -26,7 +26,6 @@ namespace VolunteerTaskManagement.Infrastructure.Persistence.Configs
                 .HasComment("نام کاربری");
 
             builder.Property(x => x.Email)
-                .IsRequired()
                 .HasMaxLength(60)
                 .HasComment("آدرس ایمیل");
 

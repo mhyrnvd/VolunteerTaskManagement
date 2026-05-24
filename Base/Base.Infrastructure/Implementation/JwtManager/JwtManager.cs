@@ -20,7 +20,6 @@ namespace Base.Infrastructure.Implementation
                 new Claim("userName", user.UserName),
                 new Claim("id", user.Id.ToString()),
                 new Claim("role", user.Role),
-                new Claim("email", user.Email),
              };
 
             if (user.Role=="Student")

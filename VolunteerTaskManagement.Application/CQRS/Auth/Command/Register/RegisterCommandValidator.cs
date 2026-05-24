@@ -12,12 +12,11 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
         {
             RuleLevelCascadeMode = CascadeMode.Stop;
 
-            RuleFor(x => x.Email)
-                .NotEmpty().WithMessage("ایمیل اجباری است!")
-                .EmailAddress().WithMessage("فرمت ایمیل صحیح نمی‌باشد!")
-                    .Must(email =>
-                        !genericRepository.Repository.Any(u => u.Email == email))
-                    .WithMessage("این ایمیل قبلاً ثبت شده است!");
+            RuleFor(x => x.UserName)
+                .NotEmpty().WithMessage("نام کاربری اجباری است!")
+                    .Must(userName =>
+                        !genericRepository.Repository.Any(u => u.UserName == userName))
+                    .WithMessage("این نام کاربری قبلاً ثبت شده است!");
 
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("نام اجباری است!")

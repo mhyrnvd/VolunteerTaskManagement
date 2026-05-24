@@ -3,14 +3,16 @@ using Microsoft.AspNetCore.Identity;
 using Base.Application.Contracts.DTOs.Common;
 using VolunteerTaskManagement.Domain.Entities;
 using VolunteerTaskManagement.Application.Contracts.Repositories;
+using VolunteerTaskManagement.Domain.Enums;
 
 namespace VolunteerTaskManagement.Application.CQRS.Auth
 {
     public class RegisterCommand : IRequest<Result<bool>>
     {
-        public string Email { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Role Role { get; set; }
         public string Password { get; set; }
         public string ConfirmedPassword { get; set; }
     }
@@ -24,9 +26,8 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email,
-                Role = "Volunteer",
-                UserName = request.FirstName + ' ' + request.LastName
+                Role = request.Role == Role.Coordinator ? "Coordinator" : "Volunteer",
+                UserName = request.UserName,
             };
             user.PasswordHash = new PasswordHasher<User>()
                 .HashPassword(user, request.Password);
@@ -34,7 +35,7 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
             await uow.Users.AddAsync(user);
             await uow.CommitAsync();
 
-            return Result<bool>.Success(true);
+            return Result.Success(true);
         }
     }
 }

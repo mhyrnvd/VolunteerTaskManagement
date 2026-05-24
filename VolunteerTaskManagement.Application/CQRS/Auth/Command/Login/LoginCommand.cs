@@ -12,7 +12,7 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
 {
     public class LoginCommand : IRequest<Result<UserDTO>>
     {
-        public string Email { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
     }
 
@@ -21,10 +21,10 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
     {
         public async Task<Result<UserDTO>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var user = await uow.Repository.FirstOrDefaultAsync(x => x.Email.Equals(request.Email));
+            var user = await uow.Repository.FirstOrDefaultAsync(x => x.UserName.Equals(request.UserName));
             if (user == null ||
                 new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
-                throw new LoginException("ایمیل یا رمزعبور اشتباه است!");
+                throw new LoginException("نام کاربری یا رمزعبور اشتباه است!");
 
             var userDto = new UserDTO
             {
@@ -49,14 +49,14 @@ namespace VolunteerTaskManagement.Application.CQRS.Auth
 
             await uow.CommitAsync();
 
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = false,
-                Secure = false,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddDays(1)
-            };
-            httpContextAccessor.HttpContext?.Response.Cookies.Append("access_token", accessToken, cookieOptions);
+            //var cookieOptions = new CookieOptions
+            //{
+            //    HttpOnly = false,
+            //    Secure = false,
+            //    SameSite = SameSiteMode.Strict,
+            //    Expires = DateTime.Now.AddDays(1)
+            //};
+            //httpContextAccessor.HttpContext?.Response.Cookies.Append("access_token", accessToken, cookieOptions);
 
             return Result<UserDTO>.Success(userDto);
         }
